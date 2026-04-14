@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>⚡ تحدي الأصدقاء · C++ ببساطة ⚡</title>
+  <!-- خطوط عربية -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&family=Changa:wght@500;600&display=swap" rel="stylesheet">
+  <!-- Font Awesome (للأزرار فقط) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Tajawal', sans-serif;
+      background: radial-gradient(circle at 10% 30%, #0f1a2b, #020712);
+      min-height: 100vh;
+      padding: 2rem 1.8rem;
+      color: #e4efff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* حركات احترافية */
+    @keyframes glowPulse {
+      0% { box-shadow: 0 20px 35px -8px rgba(0, 180, 255, 0.2), 0 0 0 1px rgba(80, 200, 255, 0.15); }
+      50% { box-shadow: 0 25px 45px -6px rgba(0, 210, 255, 0.35), 0 0 0 1px rgba(120, 220, 255, 0.4); }
+      100% { box-shadow: 0 20px 35px -8px rgba(0, 180, 255, 0.2), 0 0 0 1px rgba(80, 200, 255, 0.15); }
+    }
+
+    @keyframes slideUp {
+      0% { opacity: 0; transform: translateY(25px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .main-wrapper {
+      max-width: 1350px;
+      width: 100%;
+    }
+
+    /* ===== شريط المتسابقين + مؤقتات ===== */
+    .racers-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: stretch;
+      gap: 2rem;
+      margin-bottom: 3.8rem;
+      animation: slideUp 0.7s ease-out;
+    }
+
+    .racer-card {
+      background: rgba(15, 25, 45, 0.55);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: 1.5px solid rgba(0, 200, 250, 0.3);
+      border-radius: 2.8rem;
+      padding: 2rem 2.2rem;
+      min-width: 210px;
+      flex: 0 1 auto;
+      box-shadow: 0 25px 30px -12px #00000080, inset 0 1px 2px #ffffff1a;
+      transition: all 0.25s;
+      animation: glowPulse 5s infinite ease-in-out;
+    }
+
+    .racer-card:hover {
+      transform: translateY(-6px);
+      border-color: #3dc6ff;
+      background: rgba(20, 35, 60, 0.7);
+    }
+
+    .racer-name {
+      font-size: 2.4rem;
+      font-weight: 800;
+      text-align: center;
+      background: linear-gradient(135deg, #cde4ff, #9bc5ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 1.4rem;
+      letter-spacing: 1px;
+      text-shadow: 0 4px 12px #00336680;
+    }
+
+    .timer-screen {
+      font-family: 'Changa', monospace;
+      font-size: 3rem;
+      font-weight: 700;
+      text-align: center;
+      background: #07111e;
+      padding: 0.5rem 0.8rem;
+      border-radius: 70px;
+      margin-bottom: 1.5rem;
+      color: #b1e3ff;
+      box-shadow: 0 6px 0 #030b14, 0 10px 20px #0000006e;
+      border: 1px solid #2a6799;
+      letter-spacing: 8px;
+      direction: ltr;
+    }
+
+    .timer-action-btn {
+      width: 100%;
+      background: linear-gradient(145deg, #173e5f, #0a1e32);
+      border: none;
+      border-radius: 60px;
+      padding: 0.9rem 0;
+      font-family: 'Tajawal', sans-serif;
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: #ecf5ff;
+      box-shadow: 0 7px 0 #091520, 0 8px 18px #00000080;
+      cursor: pointer;
+      transition: all 0.1s;
+      border: 1px solid #3773aa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .timer-action-btn i {
+      font-size: 1.2rem;
+    }
+
+    .timer-action-btn:active {
+      transform: translateY(5px);
+      box-shadow: 0 2px 0 #091520, 0 8px 18px #00000080;
+    }
+
+    .timer-action-btn.running {
+      background: linear-gradient(145deg, #9e3f5c, #69273f);
+      box-shadow: 0 7px 0 #3b1c28, 0 8px 18px #000;
+      border-color: #e07a96;
+    }
+
+    /* ===== شبكة المسائل ===== */
+    .challenges-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 2.2rem;
+      margin-top: 1.2rem;
+    }
+
+    .challenge-card {
+      background: rgba(8, 18, 30, 0.65);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(70, 170, 250, 0.35);
+      border-radius: 2.5rem;
+      padding: 2rem 1.9rem;
+      box-shadow: 0 25px 30px -15px #000000d0, inset 0 0 0 1px #2a5075;
+      transition: all 0.2s;
+      display: flex;
+      flex-direction: column;
+      animation: slideUp 0.6s ease backwards;
+      animation-delay: calc(0.06s * var(--order, 0));
+    }
+
+    .challenge-card:hover {
+      border-color: #5eb0ff;
+      background: rgba(14, 28, 48, 0.75);
+      box-shadow: 0 30px 45px -12px #000, 0 0 20px #1e90ff40;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 1.3rem;
+    }
+
+    .problem-index {
+      font-size: 2.2rem;
+      font-weight: 800;
+      background: linear-gradient(145deg, #aad0ff, #5ca5ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .problem-name {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #d3e7ff;
+    }
+
+    .desc-box {
+      background: #0a1426cc;
+      padding: 1.2rem 1.3rem;
+      border-radius: 1.8rem;
+      margin: 0.8rem 0 1.4rem;
+      border-right: 6px solid #2f9eff;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: #cee6ff;
+      box-shadow: inset 0 2px 8px #00000066;
+    }
+
+    .example-snippet {
+      font-family: 'Changa', monospace;
+      background: #030c17;
+      padding: 0.9rem 1.5rem;
+      border-radius: 1.5rem;
+      margin-bottom: 1.8rem;
+      color: #b3e2ff;
+      border: 1px dashed #3e7fb0;
+      font-size: 1rem;
+      direction: ltr;
+      text-align: left;
+    }
+
+    .toggle-sol-btn {
+      background: transparent;
+      border: 2px solid #3680cf;
+      color: #c2defa;
+      padding: 0.9rem 1.2rem;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      cursor: pointer;
+      backdrop-filter: blur(5px);
+      transition: 0.2s;
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 5px 10px #00000055;
+    }
+
+    .toggle-sol-btn:hover {
+      background: #1f4a75;
+      border-color: #7ebcff;
+      color: white;
+      box-shadow: 0 0 18px #3f9eff;
+    }
+
+    .solution-wrapper {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.55s cubic-bezier(0.33, 1, 0.68, 1), margin 0.3s;
+      margin-top: 0;
+      border-radius: 1.4rem;
+    }
+
+    .solution-wrapper.expanded {
+      max-height: 1050px;
+      margin-top: 1.8rem;
+    }
+
+    .solution-panel {
+      background: #0f1e30e0;
+      backdrop-filter: blur(8px);
+      border-radius: 1.8rem;
+      padding: 1.8rem 1.6rem;
+      border: 1px solid #3874b0;
+      box-shadow: inset 0 0 12px #00000066, 0 12px 20px -8px #000;
+    }
+
+    .solution-panel h4 {
+      color: #9fcaff;
+      margin-bottom: 1.3rem;
+      font-weight: 700;
+      font-size: 1.3rem;
+    }
+
+    .code-block {
+      background: #031120;
+      padding: 1.3rem 1.4rem;
+      border-radius: 1.2rem;
+      font-family: 'Changa', monospace;
+      font-size: 1rem;
+      color: #d7ecff;
+      border: 1px solid #2c6596;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-break: break-word;
+      margin-bottom: 1.8rem;
+      direction: ltr;
+      text-align: left;
+    }
+
+    .explain-line {
+      margin: 1rem 0;
+      padding-right: 0.8rem;
+      border-right: 4px solid #3b9eff;
+      color: #c5ddff;
+      font-size: 1.05rem;
+    }
+
+    .explain-line i {
+      color: #78b9ff;
+      margin-left: 10px;
+    }
+
+    hr {
+      border: 0.5px solid #2e5580;
+      margin: 1.2rem 0;
+    }
+
+    .footer-message {
+      margin-top: 4rem;
+      text-align: center;
+      font-weight: 500;
+      opacity: 0.8;
+      font-size: 1.2rem;
+    }
+
+    @media (max-width: 600px) {
+      body { padding: 1rem 0.8rem; }
+      .racer-card { padding: 1.5rem 1.2rem; min-width: 150px; }
+      .racer-name { font-size: 1.9rem; }
+      .timer-screen { font-size: 2.4rem; }
+    }
+
+    button, .toggle-sol-btn { user-select: none; }
+  </style>
+</head>
+<body>
+<div class="main-wrapper">
+  <!-- صف الأصدقاء + المؤقتات (بدون أيقونات على الأسماء) -->
+  <div class="racers-row">
+    <!-- حسام -->
+    <div class="racer-card">
+      <div class="racer-name">حسام</div>
+      <div class="timer-screen" id="timerHossamDisplay">00:00</div>
+      <button class="timer-action-btn" id="timerHossamBtn" data-person="hossam"><i class="fas fa-play"></i> ابدأ</button>
+    </div>
+    <!-- علا -->
+    <div class="racer-card">
+      <div class="racer-name">علا</div>
+      <div class="timer-screen" id="timerOlaDisplay">00:00</div>
+      <button class="timer-action-btn" id="timerOlaBtn" data-person="ola"><i class="fas fa-play"></i> ابدأ</button>
+    </div>
+    <!-- علاء -->
+    <div class="racer-card">
+      <div class="racer-name">علاء</div>
+      <div class="timer-screen" id="timerAlaaDisplay">00:00</div>
+      <button class="timer-action-btn" id="timerAlaaBtn" data-person="alaa"><i class="fas fa-play"></i> ابدأ</button>
+    </div>
+  </div>
+
+  <!-- شبكة المسائل الستة -->
+  <div class="challenges-grid" id="challengesGrid"></div>
+  
+  <div class="footer-message">
+    🧠 فكر أولاً · اضغط «عرض الحل» بعد المحاولة · تحدي الأصدقاء 🧠
+  </div>
+</div>
+
+<script>
+  (function(){
+    "use strict";
+
+    // ---------- نظام المؤقت (Stopwatch) ----------
+    class Stopwatch {
+      constructor(displayEl, btnEl) {
+        this.display = displayEl;
+        this.button = btnEl;
+        this.running = false;
+        this.seconds = 0;
+        this.interval = null;
+        this.button.addEventListener('click', () => this.toggle());
+      }
+
+      toggle() {
+        this.running ? this.stop() : this.start();
+      }
+
+      start() {
+        if (this.running) return;
+        this.running = true;
+        this.button.innerHTML = '<i class="fas fa-stop"></i> إيقاف';
+        this.button.classList.add('running');
+        this.interval = setInterval(() => {
+          this.seconds++;
+          this.updateDisplay();
+        }, 1000);
+      }
+
+      stop() {
+        if (!this.running) return;
+        this.running = false;
+        this.button.innerHTML = '<i class="fas fa-play"></i> ابدأ';
+        this.button.classList.remove('running');
+        if (this.interval) {
+          clearInterval(this.interval);
+          this.interval = null;
+        }
+      }
+
+      updateDisplay() {
+        const mins = Math.floor(this.seconds / 60);
+        const secs = this.seconds % 60;
+        this.display.textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+      }
+    }
+
+    // تهيئة المؤقتات
+    const timerHossamDisplay = document.getElementById('timerHossamDisplay');
+    const timerHossamBtn = document.getElementById('timerHossamBtn');
+    const timerOlaDisplay = document.getElementById('timerOlaDisplay');
+    const timerOlaBtn = document.getElementById('timerOlaBtn');
+    const timerAlaaDisplay = document.getElementById('timerAlaaDisplay');
+    const timerAlaaBtn = document.getElementById('timerAlaaBtn');
+
+    const hossamWatch = new Stopwatch(timerHossamDisplay, timerHossamBtn);
+    const olaWatch = new Stopwatch(timerOlaDisplay, timerOlaBtn);
+    const alaaWatch = new Stopwatch(timerAlaaDisplay, timerAlaaBtn);
+
+    // ---------- بيانات المسائل (بلغة C++ بسيطة جداً) ----------
+    const problemsData = [
+      { // 1
+        num: 1,
+        title: "طباعة الرقم",
+        desc: "اقرأ رقمًا واحدًا واطبعه كما هو.",
+        example: "مثال: 5  →  الناتج: 5",
+        solution: {
+          code: `#include <iostream>
+using namespace std;
+
+int main() {
+    int x;
+    cin >> x;
+    cout << x;
+    return 0;
+}`,
+          explanation: [
+            { line: "#include <iostream>", meaning: "مكتبة الإدخال والإخراج." },
+            { line: "using namespace std;", meaning: "لتجنب كتابة std:: بشكل متكرر." },
+            { line: "int x;", meaning: "تعريف متغير صحيح x." },
+            { line: "cin >> x;", meaning: "قراءة قيمة x من المستخدم." },
+            { line: "cout << x;", meaning: "طباعة قيمة x." }
+          ]
+        }
+      },
+      { // 2
+        num: 2,
+        title: "جمع رقمين",
+        desc: "اقرأ رقمين (كل رقم في سطر منفصل) واطبع مجموعهما.",
+        example: "مثال: 3 ثم 7  →  الناتج: 10",
+        solution: {
+          code: `#include <iostream>
+using namespace std;
+
+int main() {
+    int a, b;
+    cin >> a;
+    cin >> b;
+    cout << a + b;
+    return 0;
+}`,
+          explanation: [
+            { line: "int a, b;", meaning: "تعريف متغيرين." },
+            { line: "cin >> a; cin >> b;", meaning: "قراءة الرقمين منفصلين." },
+            { line: "cout << a + b;", meaning: "طباعة المجموع." }
+          ]
+        }
+      },
+      { // 3
+        num: 3,
+        title: "العد حتى N",
+        desc: "اقرأ الرقم n ثم اطبع الأعداد من 1 إلى n.",
+        example: "مثال: 5  →  1 2 3 4 5",
+        solution: {
+          code: `#include <iostream>
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+    int i = 1;
+    while (i <= n) {
+        cout << i << " ";
+        i = i + 1;
+    }
+    return 0;
+}`,
+          explanation: [
+            { line: "int n; cin >> n;", meaning: "قراءة العدد n." },
+            { line: "int i = 1;", meaning: "عداد يبدأ من 1." },
+            { line: "while (i <= n)", meaning: "طالما i أقل أو يساوي n." },
+            { line: "cout << i << \" \";", meaning: "طباعة i ومسافة." },
+            { line: "i = i + 1;", meaning: "زيادة العداد." }
+          ]
+        }
+      },
+      { // 4
+        num: 4,
+        title: "زوجي أم فردي",
+        desc: "اقرأ رقمًا واطبع 'Even' إذا كان زوجيًا، و'Odd' إذا كان فرديًا.",
+        example: "4 → Even  |  7 → Odd",
+        solution: {
+          code: `#include <iostream>
+using namespace std;
+
+int main() {
+    int x;
+    cin >> x;
+    if (x % 2 == 0) {
+        cout << "Even";
+    } else {
+        cout << "Odd";
+    }
+    return 0;
+}`,
+          explanation: [
+            { line: "cin >> x;", meaning: "قراءة الرقم." },
+            { line: "if (x % 2 == 0)", meaning: "باقي القسمة على 2. صفر يعني زوجي." },
+            { line: "cout << \"Even\";", meaning: "طباعة Even." },
+            { line: "else cout << \"Odd\";", meaning: "وإلا فردي." }
+          ]
+        }
+      },
+      { // 5
+        num: 5,
+        title: "مجموع الأعداد إلى N",
+        desc: "اقرأ n ثم اطبع مجموع الأعداد من 1 حتى n.",
+        example: "5 → 1+2+3+4+5 = 15",
+        solution: {
+          code: `#include <iostream>
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+    int sum = 0;
+    int i = 1;
+    while (i <= n) {
+        sum = sum + i;
+        i = i + 1;
+    }
+    cout << sum;
+    return 0;
+}`,
+          explanation: [
+            { line: "int sum = 0;", meaning: "متغير لتجميع المجموع." },
+            { line: "while (i <= n)", meaning: "التكرار من 1 حتى n." },
+            { line: "sum = sum + i;", meaning: "إضافة i إلى المجموع." },
+            { line: "i = i + 1;", meaning: "زيادة العداد." },
+            { line: "cout << sum;", meaning: "طباعة المجموع النهائي." }
+          ]
+        }
+      },
+      { // 6
+        num: 6,
+        title: "أكبر رقم بين ثلاثة",
+        desc: "اقرأ ثلاثة أرقام (كل رقم بسطر) واطبع أكبرهم.",
+        example: "3 , 7 , 5  → 7",
+        solution: {
+          code: `#include <iostream>
+using namespace std;
+
+int main() {
+    int a, b, c;
+    cin >> a;
+    cin >> b;
+    cin >> c;
+    int max = a;
+    if (b > max) {
+        max = b;
+    }
+    if (c > max) {
+        max = c;
+    }
+    cout << max;
+    return 0;
+}`,
+          explanation: [
+            { line: "cin >> a >> b >> c;", meaning: "قراءة الأرقام الثلاثة." },
+            { line: "int max = a;", meaning: "نفترض أن a هو الأكبر." },
+            { line: "if (b > max) max = b;", meaning: "إذا b أكبر نحدّث." },
+            { line: "if (c > max) max = c;", meaning: "نقارن مع c." },
+            { line: "cout << max;", meaning: "طباعة الأكبر." }
+          ]
+        }
+      }
+    ];
+
+    const gridContainer = document.getElementById('challengesGrid');
+
+    // بناء البطاقات
+    problemsData.forEach((prob, idx) => {
+      const card = document.createElement('div');
+      card.className = 'challenge-card';
+      card.style.setProperty('--order', idx);
+
+      // رأس البطاقة
+      const headerDiv = document.createElement('div');
+      headerDiv.className = 'card-header';
+      headerDiv.innerHTML = `
+        <span class="problem-index">#${prob.num}</span>
+        <span class="problem-name">${prob.title}</span>
+      `;
+
+      // وصف المسألة
+      const descDiv = document.createElement('div');
+      descDiv.className = 'desc-box';
+      descDiv.textContent = prob.desc;
+
+      // مثال
+      const exampleDiv = document.createElement('div');
+      exampleDiv.className = 'example-snippet';
+      exampleDiv.textContent = prob.example;
+
+      // زر عرض الحل
+      const toggleBtn = document.createElement('button');
+      toggleBtn.className = 'toggle-sol-btn';
+      toggleBtn.innerHTML = '<i class="fas fa-chevron-down"></i> عرض الحل';
+
+      // حاوية الحل (قابلة للطي)
+      const solutionWrap = document.createElement('div');
+      solutionWrap.className = 'solution-wrapper';
+
+      const solutionPanel = document.createElement('div');
+      solutionPanel.className = 'solution-panel';
+
+      // كود الحل
+      const codeTitle = document.createElement('h4');
+      codeTitle.innerHTML = '🧩 الكود (++C)';
+      const codePre = document.createElement('pre');
+      codePre.className = 'code-block';
+      codePre.textContent = prob.solution.code;
+
+      // شرح سطر بسطر
+      const explainTitle = document.createElement('h4');
+      explainTitle.innerHTML = '📖 شرح سطر بسطر';
+      
+      solutionPanel.appendChild(codeTitle);
+      solutionPanel.appendChild(codePre);
+      solutionPanel.appendChild(explainTitle);
+
+      prob.solution.explanation.forEach(item => {
+        const lineDiv = document.createElement('div');
+        lineDiv.className = 'explain-line';
+        lineDiv.innerHTML = `<i class="fas fa-angle-left"></i> <code style="background:#0c213a; padding:2px 10px; border-radius:30px;">${item.line}</code> — ${item.meaning}`;
+        solutionPanel.appendChild(lineDiv);
+      });
+
+      solutionWrap.appendChild(solutionPanel);
+      
+      // التحكم في الطي
+      let expanded = false;
+      toggleBtn.addEventListener('click', () => {
+        expanded = !expanded;
+        if (expanded) {
+          solutionWrap.classList.add('expanded');
+          toggleBtn.innerHTML = '<i class="fas fa-chevron-up"></i> إخفاء الحل';
+        } else {
+          solutionWrap.classList.remove('expanded');
+          toggleBtn.innerHTML = '<i class="fas fa-chevron-down"></i> عرض الحل';
+        }
+      });
+
+      // تجميع البطاقة
+      card.appendChild(headerDiv);
+      card.appendChild(descDiv);
+      card.appendChild(exampleDiv);
+      card.appendChild(toggleBtn);
+      card.appendChild(solutionWrap);
+
+      gridContainer.appendChild(card);
+    });
+
+  })();
+</script>
+</body>
+</html>
