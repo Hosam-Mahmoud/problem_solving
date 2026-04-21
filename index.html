@@ -7,9 +7,9 @@
   <!-- خطوط عربية -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&family=Changa:wght@500;600&display=swap" rel="stylesheet">
-  <!-- Font Awesome (للأزرار فقط) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&family=Changa:wght@500;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     * {
       margin: 0;
@@ -19,9 +19,9 @@
 
     body {
       font-family: 'Tajawal', sans-serif;
-      background: radial-gradient(circle at 10% 30%, #0f1a2b, #020712);
+      background: radial-gradient(circle at 10% 20%, #0f1a2b, #020712);
       min-height: 100vh;
-      padding: 2rem 1.8rem;
+      padding: 2rem 1.5rem;
       color: #e4efff;
       display: flex;
       flex-direction: column;
@@ -30,316 +30,304 @@
 
     /* حركات احترافية */
     @keyframes glowPulse {
-      0% { box-shadow: 0 20px 35px -8px rgba(0, 180, 255, 0.2), 0 0 0 1px rgba(80, 200, 255, 0.15); }
-      50% { box-shadow: 0 25px 45px -6px rgba(0, 210, 255, 0.35), 0 0 0 1px rgba(120, 220, 255, 0.4); }
-      100% { box-shadow: 0 20px 35px -8px rgba(0, 180, 255, 0.2), 0 0 0 1px rgba(80, 200, 255, 0.15); }
+      0% { box-shadow: 0 20px 35px -8px rgba(0, 180, 255, 0.15), 0 0 0 1px rgba(80, 200, 255, 0.1); }
+      50% { box-shadow: 0 25px 45px -6px rgba(0, 210, 255, 0.3), 0 0 0 1px rgba(120, 220, 255, 0.3); }
+      100% { box-shadow: 0 20px 35px -8px rgba(0, 180, 255, 0.15), 0 0 0 1px rgba(80, 200, 255, 0.1); }
     }
 
     @keyframes slideUp {
-      0% { opacity: 0; transform: translateY(25px); }
+      0% { opacity: 0; transform: translateY(30px); }
       100% { opacity: 1; transform: translateY(0); }
     }
 
     .main-wrapper {
-      max-width: 1350px;
+      max-width: 1400px;
       width: 100%;
     }
 
-    /* ===== شريط المتسابقين + مؤقتات ===== */
+    /* ===== قسم المتسابقين (Timers) ===== */
     .racers-row {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       align-items: stretch;
-      gap: 2rem;
-      margin-bottom: 3.8rem;
+      gap: 1.5rem;
+      margin-bottom: 4rem;
       animation: slideUp 0.7s ease-out;
     }
 
     .racer-card {
-      background: rgba(15, 25, 45, 0.55);
-      backdrop-filter: blur(15px);
-      -webkit-backdrop-filter: blur(15px);
-      border: 1.5px solid rgba(0, 200, 250, 0.3);
-      border-radius: 2.8rem;
-      padding: 2rem 2.2rem;
-      min-width: 210px;
+      background: rgba(15, 25, 45, 0.6);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(0, 200, 250, 0.25);
+      border-radius: 2rem;
+      padding: 1.5rem 2rem;
+      min-width: 200px;
       flex: 0 1 auto;
-      box-shadow: 0 25px 30px -12px #00000080, inset 0 1px 2px #ffffff1a;
-      transition: all 0.25s;
-      animation: glowPulse 5s infinite ease-in-out;
-    }
-
-    .racer-card:hover {
-      transform: translateY(-6px);
-      border-color: #3dc6ff;
-      background: rgba(20, 35, 60, 0.7);
+      box-shadow: 0 20px 30px -10px #00000080, inset 0 1px 2px #ffffff1a;
+      transition: transform 0.2s;
+      animation: glowPulse 6s infinite ease-in-out;
+      text-align: center;
     }
 
     .racer-name {
-      font-size: 2.4rem;
+      font-size: 2rem;
       font-weight: 800;
-      text-align: center;
-      background: linear-gradient(135deg, #cde4ff, #9bc5ff);
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #cde4ff, #7db8ff);
       -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      margin-bottom: 1.4rem;
-      letter-spacing: 1px;
-      text-shadow: 0 4px 12px #00336680;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.5px;
     }
 
     .timer-screen {
       font-family: 'Changa', monospace;
-      font-size: 3rem;
+      font-size: 2.8rem;
       font-weight: 700;
-      text-align: center;
-      background: #07111e;
-      padding: 0.5rem 0.8rem;
-      border-radius: 70px;
-      margin-bottom: 1.5rem;
-      color: #b1e3ff;
-      box-shadow: 0 6px 0 #030b14, 0 10px 20px #0000006e;
-      border: 1px solid #2a6799;
-      letter-spacing: 8px;
+      background: #050d16;
+      padding: 0.6rem 1.2rem;
+      border-radius: 1rem;
+      margin-bottom: 1.2rem;
+      color: #5fd0ff;
+      box-shadow: inset 0 4px 10px #000, 0 2px 0 #1c354e;
+      border: 1px solid #1e3a5f;
+      letter-spacing: 4px;
       direction: ltr;
     }
 
     .timer-action-btn {
       width: 100%;
-      background: linear-gradient(145deg, #173e5f, #0a1e32);
+      background: linear-gradient(145deg, #153c5d, #0d2236);
       border: none;
-      border-radius: 60px;
-      padding: 0.9rem 0;
+      border-radius: 50px;
+      padding: 0.8rem;
       font-family: 'Tajawal', sans-serif;
       font-weight: 700;
-      font-size: 1.3rem;
-      color: #ecf5ff;
-      box-shadow: 0 7px 0 #091520, 0 8px 18px #00000080;
-      cursor: pointer;
-      transition: all 0.1s;
-      border: 1px solid #3773aa;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-    }
-
-    .timer-action-btn i {
-      font-size: 1.2rem;
-    }
-
-    .timer-action-btn:active {
-      transform: translateY(5px);
-      box-shadow: 0 2px 0 #091520, 0 8px 18px #00000080;
-    }
-
-    .timer-action-btn.running {
-      background: linear-gradient(145deg, #9e3f5c, #69273f);
-      box-shadow: 0 7px 0 #3b1c28, 0 8px 18px #000;
-      border-color: #e07a96;
-    }
-
-    /* ===== شبكة المسائل ===== */
-    .challenges-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-      gap: 2.2rem;
-      margin-top: 1.2rem;
-    }
-
-    .challenge-card {
-      background: rgba(8, 18, 30, 0.65);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border: 1px solid rgba(70, 170, 250, 0.35);
-      border-radius: 2.5rem;
-      padding: 2rem 1.9rem;
-      box-shadow: 0 25px 30px -15px #000000d0, inset 0 0 0 1px #2a5075;
-      transition: all 0.2s;
-      display: flex;
-      flex-direction: column;
-      animation: slideUp 0.6s ease backwards;
-      animation-delay: calc(0.06s * var(--order, 0));
-    }
-
-    .challenge-card:hover {
-      border-color: #5eb0ff;
-      background: rgba(14, 28, 48, 0.75);
-      box-shadow: 0 30px 45px -12px #000, 0 0 20px #1e90ff40;
-    }
-
-    .card-header {
-      display: flex;
-      align-items: baseline;
-      gap: 12px;
-      margin-bottom: 1.3rem;
-    }
-
-    .problem-index {
-      font-size: 2.2rem;
-      font-weight: 800;
-      background: linear-gradient(145deg, #aad0ff, #5ca5ff);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .problem-name {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: #d3e7ff;
-    }
-
-    .desc-box {
-      background: #0a1426cc;
-      padding: 1.2rem 1.3rem;
-      border-radius: 1.8rem;
-      margin: 0.8rem 0 1.4rem;
-      border-right: 6px solid #2f9eff;
       font-size: 1.1rem;
-      line-height: 1.6;
-      color: #cee6ff;
-      box-shadow: inset 0 2px 8px #00000066;
-    }
-
-    .example-snippet {
-      font-family: 'Changa', monospace;
-      background: #030c17;
-      padding: 0.9rem 1.5rem;
-      border-radius: 1.5rem;
-      margin-bottom: 1.8rem;
-      color: #b3e2ff;
-      border: 1px dashed #3e7fb0;
-      font-size: 1rem;
-      direction: ltr;
-      text-align: left;
-    }
-
-    .toggle-sol-btn {
-      background: transparent;
-      border: 2px solid #3680cf;
-      color: #c2defa;
-      padding: 0.9rem 1.2rem;
-      border-radius: 50px;
-      font-weight: 700;
-      font-size: 1.1rem;
+      color: #e6f2ff;
       cursor: pointer;
-      backdrop-filter: blur(5px);
-      transition: 0.2s;
-      margin-top: auto;
+      transition: 0.1s;
+      border: 1px solid #305b85;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      box-shadow: 0 5px 10px #00000055;
     }
 
-    .toggle-sol-btn:hover {
-      background: #1f4a75;
-      border-color: #7ebcff;
-      color: white;
-      box-shadow: 0 0 18px #3f9eff;
+    .timer-action-btn:active {
+      transform: scale(0.96);
     }
 
-    .solution-wrapper {
-      max-height: 0;
+    .timer-action-btn.running {
+      background: linear-gradient(145deg, #a83d5d, #6e2338);
+      border-color: #e57b96;
+    }
+
+    /* ===== شبكة المسائل (Grid) ===== */
+    .challenges-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+      gap: 2rem;
+    }
+
+    .challenge-card {
+      background: rgba(9, 20, 35, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(60, 160, 255, 0.2);
+      border-radius: 2rem;
+      padding: 2rem;
+      position: relative;
       overflow: hidden;
-      transition: max-height 0.55s cubic-bezier(0.33, 1, 0.68, 1), margin 0.3s;
-      margin-top: 0;
-      border-radius: 1.4rem;
+      display: flex;
+      flex-direction: column;
+      animation: slideUp 0.6s ease backwards;
+      transition: all 0.3s;
+      box-shadow: 0 15px 30px -10px #0000006e;
     }
 
-    .solution-wrapper.expanded {
-      max-height: 1050px;
-      margin-top: 1.8rem;
+    .challenge-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(100, 200, 255, 0.4);
+      box-shadow: 0 25px 40px -10px #00000080, 0 0 20px rgba(0, 150, 255, 0.1);
     }
 
-    .solution-panel {
-      background: #0f1e30e0;
-      backdrop-filter: blur(8px);
-      border-radius: 1.8rem;
-      padding: 1.8rem 1.6rem;
-      border: 1px solid #3874b0;
-      box-shadow: inset 0 0 12px #00000066, 0 12px 20px -8px #000;
-    }
-
-    .solution-panel h4 {
-      color: #9fcaff;
-      margin-bottom: 1.3rem;
+    /* شارات الصعوبة */
+    .difficulty-badge {
+      position: absolute;
+      top: 1.5rem;
+      left: 1.5rem;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
       font-weight: 700;
-      font-size: 1.3rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+    .diff-green { background: linear-gradient(135deg, #2ecc71, #27ae60); color: #fff; }
+    .diff-yellow { background: linear-gradient(135deg, #f1c40f, #f39c12); color: #000; }
+    .diff-orange { background: linear-gradient(135deg, #e67e22, #d35400); color: #fff; }
+    .diff-blue { background: linear-gradient(135deg, #3498db, #2980b9); color: #fff; }
+    .diff-red { background: linear-gradient(135deg, #e74c3c, #c0392b); color: #fff; }
+
+    .card-header {
+      margin-left: 3.5rem; /* Space for badge */
+      margin-bottom: 1.5rem;
     }
 
-    .code-block {
-      background: #031120;
-      padding: 1.3rem 1.4rem;
-      border-radius: 1.2rem;
-      font-family: 'Changa', monospace;
-      font-size: 1rem;
-      color: #d7ecff;
-      border: 1px solid #2c6596;
-      overflow-x: auto;
-      white-space: pre-wrap;
-      word-break: break-word;
-      margin-bottom: 1.8rem;
+    .problem-index {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.9rem;
+      color: #5ea1ff;
+      margin-bottom: 0.3rem;
+      display: block;
+    }
+
+    .problem-title {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .problem-statement {
+      font-size: 1.05rem;
+      color: #cbd5e8;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+      background: rgba(255,255,255,0.03);
+      padding: 1rem;
+      border-radius: 1rem;
+      border-right: 3px solid #2c5f99;
+    }
+
+    .io-container {
+      background: #0b121e;
+      border: 1px solid #233a55;
+      border-radius: 1rem;
+      padding: 1rem;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+      color: #a8c7e6;
       direction: ltr;
       text-align: left;
     }
+    .io-label {
+      color: #5da9ff;
+      font-weight: bold;
+      display: block;
+      margin-bottom: 0.5rem;
+      font-family: 'Tajawal', sans-serif;
+    }
+    .io-block {
+      background: rgba(0,0,0,0.4);
+      padding: 0.5rem 0.8rem;
+      border-radius: 0.5rem;
+      margin-bottom: 0.5rem;
+      white-space: pre-wrap;
+    }
+    .io-block:last-child { margin-bottom: 0; }
 
-    .explain-line {
-      margin: 1rem 0;
-      padding-right: 0.8rem;
-      border-right: 4px solid #3b9eff;
-      color: #c5ddff;
-      font-size: 1.05rem;
+    /* زر الحل */
+    .toggle-sol-btn {
+      background: rgba(45, 85, 130, 0.2);
+      border: 2px solid #3b7ac4;
+      color: #d6eaff;
+      padding: 0.8rem 1.5rem;
+      border-radius: 50px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: auto;
+      align-self: center;
+      transition: 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .toggle-sol-btn:hover {
+      background: #3b7ac4;
+      color: white;
+      box-shadow: 0 0 15px rgba(59, 122, 196, 0.5);
     }
 
-    .explain-line i {
-      color: #78b9ff;
-      margin-left: 10px;
+    /* لوحة الحل */
+    .solution-wrapper {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+      border-radius: 1rem;
+    }
+    .solution-wrapper.expanded { max-height: 1500px; margin-top: 1.5rem; }
+
+    .solution-panel {
+      background: #0f1c2e;
+      border: 1px solid #334e68;
+      border-radius: 1rem;
+      padding: 1.5rem;
     }
 
-    hr {
-      border: 0.5px solid #2e5580;
-      margin: 1.2rem 0;
+    .code-block {
+      background: #080f1c;
+      padding: 1.2rem;
+      border-radius: 0.8rem;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.95rem;
+      color: #d1e8ff;
+      border: 1px solid #1f3a52;
+      overflow-x: auto;
+      direction: ltr;
+      text-align: left;
+      margin-bottom: 1.5rem;
+      line-height: 1.5;
     }
 
+    .explanation-list {
+      list-style: none;
+    }
+    .explanation-list li {
+      position: relative;
+      padding-right: 1.5rem;
+      margin-bottom: 0.8rem;
+      font-size: 1rem;
+      color: #b8d4f0;
+    }
+    .explanation-list li::before {
+      content: '➤';
+      position: absolute;
+      right: 0;
+      color: #4da6ff;
+      font-size: 0.8rem;
+      top: 4px;
+    }
+    
     .footer-message {
-      margin-top: 4rem;
       text-align: center;
-      font-weight: 500;
-      opacity: 0.8;
+      margin-top: 4rem;
       font-size: 1.2rem;
+      color: #5e7c9e;
     }
 
     @media (max-width: 600px) {
-      body { padding: 1rem 0.8rem; }
-      .racer-card { padding: 1.5rem 1.2rem; min-width: 150px; }
-      .racer-name { font-size: 1.9rem; }
-      .timer-screen { font-size: 2.4rem; }
+      .challenges-grid { grid-template-columns: 1fr; }
+      .problem-title { font-size: 1.3rem; }
+      .racer-card { min-width: 140px; padding: 1rem; }
     }
-
-    button, .toggle-sol-btn { user-select: none; }
   </style>
 </head>
 <body>
 <div class="main-wrapper">
-  <!-- صف الأصدقاء + المؤقتات (بدون أيقونات على الأسماء) -->
+  <!-- المتسابقون -->
   <div class="racers-row">
-    <!-- حسام -->
     <div class="racer-card">
       <div class="racer-name">حسام</div>
       <div class="timer-screen" id="timerHossamDisplay">00:00</div>
       <button class="timer-action-btn" id="timerHossamBtn" data-person="hossam"><i class="fas fa-play"></i> ابدأ</button>
     </div>
-    <!-- علا -->
     <div class="racer-card">
       <div class="racer-name">علا</div>
       <div class="timer-screen" id="timerOlaDisplay">00:00</div>
       <button class="timer-action-btn" id="timerOlaBtn" data-person="ola"><i class="fas fa-play"></i> ابدأ</button>
     </div>
-    <!-- الاء -->
     <div class="racer-card">
       <div class="racer-name">الاء</div>
       <div class="timer-screen" id="timerAlaaDisplay">00:00</div>
@@ -347,11 +335,11 @@
     </div>
   </div>
 
-  <!-- شبكة المسائل الستة -->
+  <!-- شبكة المسائل -->
   <div class="challenges-grid" id="challengesGrid"></div>
   
   <div class="footer-message">
-    🧠 فكر أولاً · اضغط «عرض الحل» بعد المحاولة · تحدي الأصدقاء 🧠
+    🚀 لا تستسلم · فكر منطقياً · اكتب الكود بثقة 🚀
   </div>
 </div>
 
@@ -359,7 +347,7 @@
   (function(){
     "use strict";
 
-    // ---------- نظام المؤقت (Stopwatch) ----------
+    // --- نظام المؤقت (Stopwatch) ---
     class Stopwatch {
       constructor(displayEl, btnEl) {
         this.display = displayEl;
@@ -369,11 +357,7 @@
         this.interval = null;
         this.button.addEventListener('click', () => this.toggle());
       }
-
-      toggle() {
-        this.running ? this.stop() : this.start();
-      }
-
+      toggle() { this.running ? this.stop() : this.start(); }
       start() {
         if (this.running) return;
         this.running = true;
@@ -381,94 +365,58 @@
         this.button.classList.add('running');
         this.interval = setInterval(() => {
           this.seconds++;
-          this.updateDisplay();
+          const mins = Math.floor(this.seconds / 60).toString().padStart(2, '0');
+          const secs = (this.seconds % 60).toString().padStart(2, '0');
+          this.display.textContent = `${mins}:${secs}`;
         }, 1000);
       }
-
       stop() {
         if (!this.running) return;
         this.running = false;
         this.button.innerHTML = '<i class="fas fa-play"></i> ابدأ';
         this.button.classList.remove('running');
-        if (this.interval) {
-          clearInterval(this.interval);
-          this.interval = null;
-        }
-      }
-
-      updateDisplay() {
-        const mins = Math.floor(this.seconds / 60);
-        const secs = this.seconds % 60;
-        this.display.textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        clearInterval(this.interval);
       }
     }
 
     // تهيئة المؤقتات
-    const timerHossamDisplay = document.getElementById('timerHossamDisplay');
-    const timerHossamBtn = document.getElementById('timerHossamBtn');
-    const timerOlaDisplay = document.getElementById('timerOlaDisplay');
-    const timerOlaBtn = document.getElementById('timerOlaBtn');
-    const timerAlaaDisplay = document.getElementById('timerAlaaDisplay');
-    const timerAlaaBtn = document.getElementById('timerAlaaBtn');
+    new Stopwatch(document.getElementById('timerHossamDisplay'), document.getElementById('timerHossamBtn'));
+    new Stopwatch(document.getElementById('timerOlaDisplay'), document.getElementById('timerOlaBtn'));
+    new Stopwatch(document.getElementById('timerAlaaDisplay'), document.getElementById('timerAlaaBtn'));
 
-    const hossamWatch = new Stopwatch(timerHossamDisplay, timerHossamBtn);
-    const olaWatch = new Stopwatch(timerOlaDisplay, timerOlaBtn);
-    const alaaWatch = new Stopwatch(timerAlaaDisplay, timerAlaaBtn);
-
-    // ---------- بيانات المسائل (بلغة C++ بسيطة جداً) ----------
+    // --- بيانات المسائل ---
     const problemsData = [
-      { // 1
-        num: 1,
-        title: "طباعة الرقم",
-        desc: "اقرأ رقمًا واحدًا واطبعه كما هو.",
-        example: "مثال: 5  →  الناتج: 5",
-        solution: {
-          code: `#include <iostream>
-using namespace std;
-
-int main() {
-    int x;
-    cin >> x;
-    cout << x;
-    return 0;
-}`,
-          explanation: [
-            { line: "#include <iostream>", meaning: "مكتبة الإدخال والإخراج." },
-            { line: "using namespace std;", meaning: "لتجنب كتابة std:: بشكل متكرر." },
-            { line: "int x;", meaning: "تعريف متغير صحيح x." },
-            { line: "cin >> x;", meaning: "قراءة قيمة x من المستخدم." },
-            { line: "cout << x;", meaning: "طباعة قيمة x." }
-          ]
-        }
-      },
-      { // 2
-        num: 2,
-        title: "جمع رقمين",
-        desc: "اقرأ رقمين (كل رقم في سطر منفصل) واطبع مجموعهما.",
-        example: "مثال: 3 ثم 7  →  الناتج: 10",
+      {
+        id: 1,
+        title: "Sum of Two Numbers",
+        diff: "green", // Very Easy
+        desc: "You are given two integers a and b. Print their sum.",
+        input: "3 5",
+        output: "8",
         solution: {
           code: `#include <iostream>
 using namespace std;
 
 int main() {
     int a, b;
-    cin >> a;
-    cin >> b;
+    cin >> a >> b;
     cout << a + b;
     return 0;
 }`,
           explanation: [
-            { line: "int a, b;", meaning: "تعريف متغيرين." },
-            { line: "cin >> a; cin >> b;", meaning: "قراءة الرقمين منفصلين." },
-            { line: "cout << a + b;", meaning: "طباعة المجموع." }
+            "تعريف متغيرين a و b لتخزين الأرقام.",
+            "قراءة الرقمين باستخدام cin.",
+            "طباعة ناتج الجمع a + b مباشرة باستخدام cout."
           ]
         }
       },
-      { // 3
-        num: 3,
-        title: "العد حتى N",
-        desc: "اقرأ الرقم n ثم اطبع الأعداد من 1 إلى n.",
-        example: "مثال: 5  →  1 2 3 4 5",
+      {
+        id: 2,
+        title: "Even or Odd",
+        diff: "green", // Easy
+        desc: "Given an integer n, determine whether it is even or odd.",
+        input: "7",
+        output: "Odd",
         solution: {
           code: `#include <iostream>
 using namespace std;
@@ -476,35 +424,8 @@ using namespace std;
 int main() {
     int n;
     cin >> n;
-    int i = 1;
-    while (i <= n) {
-        cout << i << " ";
-        i = i + 1;
-    }
-    return 0;
-}`,
-          explanation: [
-            { line: "int n; cin >> n;", meaning: "قراءة العدد n." },
-            { line: "int i = 1;", meaning: "عداد يبدأ من 1." },
-            { line: "while (i <= n)", meaning: "طالما i أقل أو يساوي n." },
-            { line: "cout << i << \" \";", meaning: "طباعة i ومسافة." },
-            { line: "i = i + 1;", meaning: "زيادة العداد." }
-          ]
-        }
-      },
-      { // 4
-        num: 4,
-        title: "زوجي أم فردي",
-        desc: "اقرأ رقمًا واطبع 'Even' إذا كان زوجيًا، و'Odd' إذا كان فرديًا.",
-        example: "4 → Even  |  7 → Odd",
-        solution: {
-          code: `#include <iostream>
-using namespace std;
-
-int main() {
-    int x;
-    cin >> x;
-    if (x % 2 == 0) {
+    
+    if (n % 2 == 0) {
         cout << "Even";
     } else {
         cout << "Odd";
@@ -512,18 +433,19 @@ int main() {
     return 0;
 }`,
           explanation: [
-            { line: "cin >> x;", meaning: "قراءة الرقم." },
-            { line: "if (x % 2 == 0)", meaning: "باقي القسمة على 2. صفر يعني زوجي." },
-            { line: "cout << \"Even\";", meaning: "طباعة Even." },
-            { line: "else cout << \"Odd\";", meaning: "وإلا فردي." }
+            "نقرأ الرقم n.",
+            "نستخدم المعامل % (Modulo) لإيجاد باقي القسمة على 2.",
+            "إذا كان الباقي 0، فالرقم زوجي (Even)، وإلا فهو فردي (Odd)."
           ]
         }
       },
-      { // 5
-        num: 5,
-        title: "مجموع الأعداد إلى N",
-        desc: "اقرأ n ثم اطبع مجموع الأعداد من 1 حتى n.",
-        example: "5 → 1+2+3+4+5 = 15",
+      {
+        id: 3,
+        title: "Count Positive Numbers",
+        diff: "yellow", // Easy
+        desc: "You are given n integers. Count how many of them are positive.",
+        input: "5\n-1 2 3 -4 5",
+        output: "3",
         solution: {
           code: `#include <iostream>
 using namespace std;
@@ -531,142 +453,294 @@ using namespace std;
 int main() {
     int n;
     cin >> n;
-    int sum = 0;
-    int i = 1;
-    while (i <= n) {
-        sum = sum + i;
-        i = i + 1;
+    
+    int count = 0;
+    for(int i = 0; i < n; i++) {
+        int x;
+        cin >> x;
+        if (x > 0) {
+            count++;
+        }
     }
-    cout << sum;
+    cout << count;
     return 0;
 }`,
           explanation: [
-            { line: "int sum = 0;", meaning: "متغير لتجميع المجموع." },
-            { line: "while (i <= n)", meaning: "التكرار من 1 حتى n." },
-            { line: "sum = sum + i;", meaning: "إضافة i إلى المجموع." },
-            { line: "i = i + 1;", meaning: "زيادة العداد." },
-            { line: "cout << sum;", meaning: "طباعة المجموع النهائي." }
+            "نقرأ عدد الأرقام n.",
+            "ننشئ حلقة تكرار (loop) تشغّل n مرة لقراءة كل رقم.",
+            "داخل الحلقة، نتحقق إذا كان الرقم أكبر من صفر، نزيد العداد count."
           ]
         }
       },
-      { // 6
-        num: 6,
-        title: "أكبر رقم بين ثلاثة",
-        desc: "اقرأ ثلاثة أرقام (كل رقم بسطر) واطبع أكبرهم.",
-        example: "3 , 7 , 5  → 7",
+      {
+        id: 4,
+        title: "Maximum Element",
+        diff: "yellow", // Easy-Medium
+        desc: "Given an array of n integers, find the maximum element.",
+        input: "4\n1 7 3 2",
+        output: "7",
+        solution: {
+          code: `#include <iostream>
+#include <algorithm> // لاستخدام دالة الـ max
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+    int arr[n];
+    
+    for(int i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
+    
+    int maxVal = arr[0];
+    for(int i = 1; i < n; i++) {
+        if (arr[i] > maxVal) {
+            maxVal = arr[i];
+        }
+    }
+    cout << maxVal;
+    return 0;
+}`,
+          explanation: [
+            "نقرأ المصفوفة بالكامل.",
+            "نفترض أن أول عنصر هو الأكبر مؤقتاً (maxVal = arr[0]).",
+            "ندور على باقي العناصر، وإذا وجدنا عنصراً أكبر، نحدّث قيمة maxVal."
+          ]
+        }
+      },
+      {
+        id: 5,
+        title: "Sort the Array",
+        diff: "orange", // Medium
+        desc: "You are given an array of n integers. Sort the array in ascending order.",
+        input: "5\n4 2 5 1 3",
+        output: "1 2 3 4 5",
+        solution: {
+          code: `#include <iostream>
+#include <algorithm> // تحتوي على دالة sort
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+    int arr[n];
+    
+    for(int i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
+    
+    // ترتيب المصفوفة من البداية للنهاية
+    sort(arr, arr + n);
+    
+    for(int i = 0; i < n; i++) {
+        cout << arr[i] << " ";
+    }
+    return 0;
+}`,
+          explanation: [
+            "بعد قراءة المصفوفة، نستخدم الدالة الجاهزة sort() من مكتبة algorithm.",
+            "تأخذ الدالة بداية المصفوفة (arr) ونهايتها (arr + n).",
+            "تقوم بترتيب العناصر تصاعدياً بشكل تلقائي وسريع."
+          ]
+        }
+      },
+ {
+        id: 6,
+        title: "Range Sum Query",
+        diff: "orange", // Medium
+        desc: "Given an array and q queries. For each query [l, r], print sum from l to r (1-based).",
+        input: "5 2\n1 2 3 4 5\n1 3\n2 5",
+        output: "6\n14",
         solution: {
           code: `#include <iostream>
 using namespace std;
 
 int main() {
-    int a, b, c;
-    cin >> a;
-    cin >> b;
-    cin >> c;
-    int max = a;
-    if (b > max) {
-        max = b;
+    int n, q;
+    cin >> n >> q;
+    int arr[n + 1]; // 1-based index
+    
+    // قراءة المصفوفة وحساب الـ Prefix Sum
+    // pref[i] = sum of elements from 1 to i
+    int pref[n + 1] = {0}; 
+    
+    for(int i = 1; i <= n; i++) {
+        cin >> arr[i];
+        pref[i] = pref[i-1] + arr[i];
     }
-    if (c > max) {
-        max = c;
+    
+    while(q--) {
+        int l, r;
+        cin >> l >> r;
+        // المجموع هو الفرق بين التراكمي عند r و l-1
+        cout << (pref[r] - pref[l-1]) << "\\n";
     }
-    cout << max;
     return 0;
 }`,
           explanation: [
-            { line: "cin >> a >> b >> c;", meaning: "قراءة الأرقام الثلاثة." },
-            { line: "int max = a;", meaning: "نفترض أن a هو الأكبر." },
-            { line: "if (b > max) max = b;", meaning: "إذا b أكبر نحدّث." },
-            { line: "if (c > max) max = c;", meaning: "نقارن مع c." },
-            { line: "cout << max;", meaning: "طباعة الأكبر." }
+            "نستخدم تقنية Prefix Sum (المجموع التراكمي).",
+            "نبني مصفوفة pref بحيث أن pref[i] تساوي مجموع العناصر من البداية حتى العنصر i.",
+            "للإجابة على أي استفسار [l, r]، الإجابة بسيطة: pref[r] - pref[l-1]."
+          ]
+        }
+      },
+      {
+        id: 7,
+        title: "Pair with Target Sum",
+        diff: "blue", // Medium-Hard
+        desc: "Given a sorted array and target x, check if two numbers sum equals x.",
+        input: "5 8\n1 2 3 5 7",
+        output: "YES",
+        solution: {
+          code: `#include <iostream>
+using namespace std;
+
+int main() {
+    int n, x;
+    cin >> n >> x;
+    int arr[n];
+    
+    for(int i = 0; i < n; i++) cin >> arr[i];
+    
+    // مؤشرين: واحد في البداية وواحد في النهاية
+    int l = 0, r = n - 1;
+    bool found = false;
+    
+    while (l < r) {
+        int sum = arr[l] + arr[r];
+        if (sum == x) {
+            found = true;
+            break;
+        } else if (sum < x) {
+            l++; // المجموع صغير، نزيد الرقم الأيسر
+        } else {
+            r--; // المجموع كبير، ننقص الرقم الأيمن
+        }
+    }
+    
+    if (found) cout << "YES";
+    else cout << "NO";
+    
+    return 0;
+}`,
+          explanation: [
+            "بما أن المصفوفة مرتبة، نستخدم تقنية Two Pointers.",
+            "نضع مؤشراً في أقصى اليسار (l) وآخر في أقصى اليمين (r).",
+            "نجمع العنصرين: إذا كان المجموع أصغر من الهدف نزيد l، وإذا كان أكبر ننقص r."
+          ]
+        }
+      },
+      {
+        id: 8,
+        title: "Subarray Sum Equals K",
+        diff: "red", // Hard
+        desc: "Given an array and integer k, find number of subarrays whose sum equals k.",
+        input: "5 5\n1 2 3 2 2",
+        output: "2",
+        solution: {
+          code: `#include <iostream>
+using namespace std;
+
+int main() {
+    int n, k;
+    cin >> n >> k;
+    int arr[n];
+    
+    for(int i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
+    
+    int count = 0;
+    
+    // الحل باستخدام Loop مضاعف (Brute Force)
+    // نمر على كل عنصر كبداية للجزء المصفوفي (Subarray)
+    for(int i = 0; i < n; i++) {
+        int currentSum = 0;
+        // نضيف العناصر التالية لنرى متى يصل المجموع لـ k
+        for(int j = i; j < n; j++) {
+            currentSum += arr[j];
+            if (currentSum == k) {
+                count++;
+            }
+        }
+    }
+    
+    cout << count;
+    return 0;
+}`,
+          explanation: [
+            "هذا الحل يعتمد على فحص جميع الأجزاء الفرعية الممكنة (Subarrays).",
+            "الحلقة الخارجية (i) تحدد نقطة البداية.",
+            "الحلقة الداخلية (j) تضيف العناصر واحداً تلو الآخر للمجموع الحالي.",
+            "كلما أصبح currentSum مساوياً لـ k، نزيد العداد count."
           ]
         }
       }
     ];
 
-    const gridContainer = document.getElementById('challengesGrid');
+    const grid = document.getElementById('challengesGrid');
 
     // بناء البطاقات
-    problemsData.forEach((prob, idx) => {
+    problemsData.forEach((prob, index) => {
       const card = document.createElement('div');
       card.className = 'challenge-card';
-      card.style.setProperty('--order', idx);
+      card.style.animationDelay = `${index * 0.1}s`;
 
-      // رأس البطاقة
-      const headerDiv = document.createElement('div');
-      headerDiv.className = 'card-header';
-      headerDiv.innerHTML = `
-        <span class="problem-index">#${prob.num}</span>
-        <span class="problem-name">${prob.title}</span>
+      // تحديد لون الصعوبة
+      const diffClass = `diff-${prob.diff}`;
+      const diffLabel = prob.diff.toUpperCase();
+
+      card.innerHTML = `
+        <span class="difficulty-badge ${diffClass}">${diffLabel}</span>
+        <div class="card-header">
+          <span class="problem-index">#Problem ${prob.id}</span>
+          <div class="problem-title">${prob.title}</div>
+        </div>
+        
+        <div class="problem-statement">
+          ${prob.desc}
+        </div>
+        
+        <div class="io-container">
+          <span class="io-label">Input:</span>
+          <div class="io-block">${prob.input}</div>
+          <span class="io-label" style="margin-top:8px">Output:</span>
+          <div class="io-block">${prob.output}</div>
+        </div>
+        
+        <button class="toggle-sol-btn">
+          <i class="fas fa-code"></i> عرض الحل والشرح
+        </button>
+        
+        <div class="solution-wrapper">
+          <div class="solution-panel">
+            <h4 style="margin-bottom:10px; color:#fff">👨‍💻 الكود (C++)</h4>
+            <div class="code-block">${prob.solution.code.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</div>
+            
+            <h4 style="margin-bottom:10px; color:#fff">💡 شرح الفكرة</h4>
+            <ul class="explanation-list">
+              ${prob.solution.explanation.map(line => `<li>${line}</li>`).join('')}
+            </ul>
+          </div>
+        </div>
       `;
 
-      // وصف المسألة
-      const descDiv = document.createElement('div');
-      descDiv.className = 'desc-box';
-      descDiv.textContent = prob.desc;
-
-      // مثال
-      const exampleDiv = document.createElement('div');
-      exampleDiv.className = 'example-snippet';
-      exampleDiv.textContent = prob.example;
-
-      // زر عرض الحل
-      const toggleBtn = document.createElement('button');
-      toggleBtn.className = 'toggle-sol-btn';
-      toggleBtn.innerHTML = '<i class="fas fa-chevron-down"></i> عرض الحل';
-
-      // حاوية الحل (قابلة للطي)
-      const solutionWrap = document.createElement('div');
-      solutionWrap.className = 'solution-wrapper';
-
-      const solutionPanel = document.createElement('div');
-      solutionPanel.className = 'solution-panel';
-
-      // كود الحل
-      const codeTitle = document.createElement('h4');
-      codeTitle.innerHTML = '🧩 الكود (++C)';
-      const codePre = document.createElement('pre');
-      codePre.className = 'code-block';
-      codePre.textContent = prob.solution.code;
-
-      // شرح سطر بسطر
-      const explainTitle = document.createElement('h4');
-      explainTitle.innerHTML = '📖 شرح سطر بسطر';
-      
-      solutionPanel.appendChild(codeTitle);
-      solutionPanel.appendChild(codePre);
-      solutionPanel.appendChild(explainTitle);
-
-      prob.solution.explanation.forEach(item => {
-        const lineDiv = document.createElement('div');
-        lineDiv.className = 'explain-line';
-        lineDiv.innerHTML = `<i class="fas fa-angle-left"></i> <code style="background:#0c213a; padding:2px 10px; border-radius:30px;">${item.line}</code> — ${item.meaning}`;
-        solutionPanel.appendChild(lineDiv);
-      });
-
-      solutionWrap.appendChild(solutionPanel);
-      
-      // التحكم في الطي
-      let expanded = false;
-      toggleBtn.addEventListener('click', () => {
-        expanded = !expanded;
-        if (expanded) {
-          solutionWrap.classList.add('expanded');
-          toggleBtn.innerHTML = '<i class="fas fa-chevron-up"></i> إخفاء الحل';
+      // تفعيل زر الحل
+      const btn = card.querySelector('.toggle-sol-btn');
+      const wrap = card.querySelector('.solution-wrapper');
+      btn.addEventListener('click', () => {
+        const isExpanded = wrap.classList.contains('expanded');
+        if (isExpanded) {
+          wrap.classList.remove('expanded');
+          btn.innerHTML = '<i class="fas fa-code"></i> عرض الحل والشرح';
         } else {
-          solutionWrap.classList.remove('expanded');
-          toggleBtn.innerHTML = '<i class="fas fa-chevron-down"></i> عرض الحل';
+          wrap.classList.add('expanded');
+          btn.innerHTML = '<i class="fas fa-times"></i> إغلاق الحل';
         }
       });
 
-      // تجميع البطاقة
-      card.appendChild(headerDiv);
-      card.appendChild(descDiv);
-      card.appendChild(exampleDiv);
-      card.appendChild(toggleBtn);
-      card.appendChild(solutionWrap);
-
-      gridContainer.appendChild(card);
+      grid.appendChild(card);
     });
 
   })();
